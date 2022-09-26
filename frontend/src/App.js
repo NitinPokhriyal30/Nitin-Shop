@@ -1,27 +1,27 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { listProducts } from './features/actions/productActions';
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import HomeScreen from "./screens/HomeScreen";
+import ProductScreen from "./screens/ProductScreen";
+import CartScreen from "./screens/CartScreen";
+import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
-
   return (
-    <div className="App">
-      {loading ? (
-        <h2>Loading...</h2>
-      ) : error ? (
-        <h3>{error}</h3>
-      ) : <h2>Hello World</h2>}
-    </div>
+    <>
+      <Header />
+      <ToastContainer />
+      <Routes>
+        <Route path="/" element={<HomeScreen />} exact />
+        <Route path="/product/:id" element={<ProductScreen />} />
+        <Route path="/cart" element={<CartScreen />} />
+      </Routes>
+      <Footer />
+    </>
   );
 }
 
