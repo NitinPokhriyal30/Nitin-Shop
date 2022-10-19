@@ -1,20 +1,14 @@
 import mongoose from "mongoose";
-import User from "./userModel.js";
 
 const reviewSchema = mongoose.Schema(
   {
-    name: {
-      type: String,
-      require: true,
-    },
-    rating: {
-      type: Number,
-      require: true,
-      default: 0.0,
-    },
-    comment: {
-      type: String,
-      require: true,
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
     },
   },
   {
@@ -26,48 +20,52 @@ const productSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      require: true,
-      ref: User,
+      required: true,
+      ref: "User",
     },
     name: {
       type: String,
-      require: true,
+      required: [true, "Please enter product name"],
+      trim: true,
+      maxLength: [100, "Product name cannot exceed 100 characters"],
     },
     image: {
       type: String,
-      require: true,
+      required: true,
     },
     brand: {
       type: String,
-      require: true,
+      required: [true, "Please provide product brand"],
     },
     category: {
       type: String,
-      require: true,
+      required: [true, "Please select category for this product"],
     },
     description: {
       type: String,
-      require: true,
+      required: [true, "Please provide product description"],
     },
     reviews: [reviewSchema],
     rating: {
       type: Number,
-      require: true,
-      default: 0.0,
-    },
-    price: {
-      type: Number,
-      require: true,
-      default: 0.0,
-    },
-    countInStock: {
-      type: Number,
-      require: true,
+      required: true,
       default: 0,
     },
     numReviews: {
       type: Number,
-      require: true,
+      required: true,
+      default: 0,
+    },
+    price: {
+      type: Number,
+      required: [true, "Please enter product price"],
+      maxLength: [5, "Product price cannot exceed 5 characters"],
+      default: 0,
+    },
+    countInStock: {
+      type: Number,
+      required: [true, "Please enter product countInStock"],
+      maxLength: [5, "Product stock cannot exceed 5 characters"],
       default: 0,
     },
   },

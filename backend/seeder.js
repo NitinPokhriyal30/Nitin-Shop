@@ -7,7 +7,7 @@ import User from "./model/userModel.js";
 import Order from "./model/orderModel.js";
 import connectDB from "./config/db.js";
 
-dotenv.config();
+dotenv.config({ path: "backend/utils/.env" });
 await connectDB();
 
 const importData = async () => {

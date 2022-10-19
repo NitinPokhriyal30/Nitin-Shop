@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import Rating1 from "@mui/material/Rating";
+import Rating1 from "@mui/material/Rating";
 // import Stack from "@mui/material/Stack";
 
 const Rating = ({ value, text, color }) => {
   return (
     <>
-      <div className="rating">
+      {/* <div className="rating">
         <span>
           <i
             style={{ color }}
@@ -68,16 +68,17 @@ const Rating = ({ value, text, color }) => {
           ></i>
         </span>
         <span className="mx-2">{text && text}</span>
-      </div>
+      </div> */}
 
-      {/* <Stack spacing={1}>
-          <Rating1
-            name="half-rating-read"
-            defaultValue={value}
-            precision={0.5}
-            readOnly
-          />
-        </Stack> */}
+      <span>
+        <Rating1
+          name="half-rating-read"
+          defaultValue={value}
+          precision={0.5}
+          readOnly
+        />
+      </span>
+      <span className="mx-2" style={{verticalAlign : 'top'}}>{text && text}</span>
     </>
   );
 };

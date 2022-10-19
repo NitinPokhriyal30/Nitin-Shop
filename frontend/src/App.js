@@ -17,8 +17,12 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path="/" element={<HomeScreen />} exact />
+        <Route path="/search/:keyword" element={<HomeScreen />}/>
         <Route path="/product/:id" element={<ProductScreen />} />
-        <Route path="/cart" element={<CartScreen />} />
+        <Route path="/">
+          <Route path="cart" element={<CartScreen />} />
+          <Route path="/cart/:id" element={<CartScreen />} />
+        </Route>
       </Routes>
       <Footer />
     </>

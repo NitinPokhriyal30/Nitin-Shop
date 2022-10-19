@@ -8,26 +8,30 @@ import {
 } from "../constants/productConstants";
 import axios from "axios";
 
-export const listProducts = () => async(dispatch) => {
+export const listProducts =
+  (keyword = "", currentPage = 1, price) =>
+  async (dispatch) => {
     try {
-        dispatch({ type: PRODUCT_LIST_REQUEST });
+      dispatch({ type: PRODUCT_LIST_REQUEST });
 
-      const { data } = await axios.get('/api/products');
+      let link = `/api/products?keyword=${keyword}&page=${currentPage}}&price[lte]=${price[1]}&price[gte]=${price[0]}`;
 
-        dispatch({
-            type: PRODUCT_LIST_SUCCESS,
-            payload: data
-        });
+      const { data } = await axios.get(link);
+
+      dispatch({
+        type: PRODUCT_LIST_SUCCESS,
+        payload: data,
+      });
     } catch (error) {
-        dispatch({
-          type: PRODUCT_LIST_FAIL,
-          payload:
-            error.response && error.response.data.message
-              ? error.response.data.message
-              : error.message,
-        });
+      dispatch({
+        type: PRODUCT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
     }
-}
+  };
  
 export const listProductsDetails = (id) => async (dispatch) => {
   try {
